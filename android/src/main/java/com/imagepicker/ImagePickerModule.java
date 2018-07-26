@@ -37,6 +37,9 @@ import com.imagepicker.utils.MediaUtils.ReadExifResult;
 import com.imagepicker.utils.RealPathUtil;
 import com.imagepicker.utils.UI;
 
+import host.exp.exponent.ActivityResultListener;
+import host.exp.expoview.Exponent;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -56,7 +59,7 @@ import static com.imagepicker.utils.MediaUtils.createNewFile;
 import static com.imagepicker.utils.MediaUtils.getResizedImage;
 
 public class ImagePickerModule extends ReactContextBaseJavaModule
-        implements ActivityEventListener
+        implements ActivityResultListener
 {
 
   public static final int REQUEST_LAUNCH_IMAGE_CAPTURE    = 13001;
@@ -129,7 +132,7 @@ public class ImagePickerModule extends ReactContextBaseJavaModule
 
     this.dialogThemeId = dialogThemeId;
     this.reactContext = reactContext;
-    this.reactContext.addActivityEventListener(this);
+    Exponent.getInstance().addActivityResultListener(this);
   }
 
   @Override
@@ -356,7 +359,7 @@ public class ImagePickerModule extends ReactContextBaseJavaModule
   }
 
   @Override
-  public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
+  public void onActivityResult(int requestCode, int resultCode, Intent data) {
     //robustness code
     if (passResult(requestCode))
     {
@@ -497,9 +500,6 @@ public class ImagePickerModule extends ReactContextBaseJavaModule
   {
     responseHelper.invokeCustomButton(this.callback, action);
   }
-
-  @Override
-  public void onNewIntent(Intent intent) { }
 
   public Context getContext()
   {
