@@ -58,7 +58,7 @@ dependencies {
     testCompile "org.powermock:powermock-classloading-xstream:${POWERMOCK_VERSION}"
     testCompile "org.mockito:mockito-core:${MOCKITO_CORE_VERSION}"
     compile project(':tipsi-stripe')
-    compile('host.exp.exponent:expoview:28.0.0@aar') {
+    compile('host.exp.exponent:expoview:+@aar') {
         transitive = true
         exclude group: 'com.github.thefuntasty', module: 'CreditCardEntry'
     }
