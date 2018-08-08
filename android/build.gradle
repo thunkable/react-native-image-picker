@@ -60,6 +60,8 @@ dependencies {
     compile project(':tipsi-stripe')
     compile('host.exp.exponent:expoview:+@aar') {
         transitive = true
+        exclude group: 'com.squareup.okhttp3', module: 'okhttp'
+        exclude group: 'com.squareup.okhttp3', module: 'okhttp-urlconnection'
         exclude group: 'com.github.thefuntasty', module: 'CreditCardEntry'
     }
 }
